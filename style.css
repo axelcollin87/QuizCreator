@@ -24,11 +24,22 @@ h3 {
 }
 
 .content-container {
+    position: relative;
     background-color: #a4b7db;
     margin: 10px 30px;
     border-radius: 5px;
     padding: 15px;
     color: #000000;
+}
+
+.remove {
+    font-weight: 900;
+    color: red;
+    font-size: 20px;
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    cursor: pointer;
 }
 
 .content-container input[type="text"] {
@@ -40,4 +51,26 @@ h3 {
 
 .content-container button {
     margin-top: 10px;
+}
+
+.bottom-buttons {
+    display: flex;
+    margin: 10px 30px;
+    justify-content: space-between;
+}
+
+.bottom-buttons button {
+    background-color: #007bff;
+    color: white;
+    height: 50px;
+    font-size: 20px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bottom-buttons button:disabled {
+    background-color: #9b9b9b;
+    cursor: default;
 }
