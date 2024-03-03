@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #f1f2f6;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
 }
@@ -21,6 +21,13 @@ h3 {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.title {
+    font-size: 70px;
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-bottom: 0px;
 }
 
 .content-container {
@@ -40,6 +47,11 @@ h3 {
     top: 5px;
     right: 15px;
     cursor: pointer;
+}
+
+#load-quiz,
+#submit-quiz {
+    display: none;
 }
 
 .content-container input[type="text"] {
@@ -73,4 +85,46 @@ h3 {
 .bottom-buttons button:disabled {
     background-color: #9b9b9b;
     cursor: default;
+}
+
+questionP {
+    margin-top: 35px;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.questionP:first-child {
+    margin-top: 10px;
+}
+
+.question {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 10px 30px;
+    background-color: #a4b7db;
+    padding: 10px;
+    border: solid 3px #c2060000;
+}
+
+.question input[type="text"] {
+    height: 25px;
+    font-size: 16px;
+    width: 80%;
+}
+
+@media screen and (max-width: 500px) {
+    .bottom-buttons {
+        display: flex;
+        flex-direction: column;
+    }
+    .bottom-buttons button {
+        margin-bottom: 5px;
+    }
+
+    .content-container input[type="text"] {
+        width: 95%;
+    }
 }
