@@ -5,7 +5,7 @@ let qNumber = 1;
 
 addQuestion.addEventListener("click", () => {
     const html = `
-        <div class="content-container" id="content-container-${qNumber}">
+        <div class="content-container">
             <label for="quiz-question-${qNumber}">Type your question here:</label>
             <br />
             <input type="text" name="quiz-question-${qNumber}" />
@@ -21,48 +21,108 @@ addQuestion.addEventListener("click", () => {
             <input value="check" name="${qNumber}" type="radio" />
             <label for="check">Checkbox question</label>
             <br />
+            <div id="answer-container-${qNumber}"></div>
         </div>
         `;
     qNumber += 1;
-    questionsContainer.innerHTML += html;
+    questionsContainer.insertAdjacentHTML("beforeend", html);
 });
 
 questionsContainer.addEventListener("click", (event) => {
     if (event.target.type === "radio") {
         const targetQuestion = document.getElementById(
-            `content-container-${event.target.name}`
+            `answer-container-${event.target.name}`
         );
         switch (event.target.value) {
             case "text":
-                targetQuestion.innerHTML += `
+                targetQuestion.innerHTML = `
                 <label>Answer:</label>
                 <br />
                 <input type="text" />`;
                 break;
             case "radio":
-                targetQuestion.innerHTML += `
-                <label>Alternative 1:</label>
-                <br />
-                <input type="text" />
-                <br />
-                <label>Alternative 2:</label>
-                <br />
-                <input type="text" />
-                <br />
-                <button>Add alternative</button>`;
+                targetQuestion.innerHTML = `
+                <div name id='alternative-container-${event.target.name}'>
+                    <label>Alternative:</label>
+                    <br />
+                    <div id='alternative'>
+                        <input type="text" />
+                        <input name="alternative${event.target.name}" type="radio" />
+                        <label>Answer</label>
+                        <br />
+                    </div>
+                    <label>Alternative:</label>
+                    <br />
+                    <div id='alternative'>
+                        <input type="text" />
+                        <input name="alternative${event.target.name}" type="radio" />
+                        <label>Answer</label>
+                        <br />
+                    </div>
+                </div>
+                <button id="add-radio-${event.target.name}">Add alternative</button>`;
                 break;
             case "check":
-                targetQuestion.innerHTML += `
-                <label>Alternative 1:</label>
-                <br />
-                <input type="text" />
-                <br />
-                <label>Alternative 2:</label>
-                <br />
-                <input type="text" />
-                <br />
-                <button>Add alternative</button>`;
+                targetQuestion.innerHTML = `
+                <div name id='alternative-container-${event.target.name}'>
+                    <label>Alternative:</label>
+                    <br />
+                    <div id='alternative'>
+                        <input type="text" />
+                        <input name="alternative${event.target.name}" type="checkbox" />
+                        <label>Answer</label>
+                        <br />
+                    </div>
+                    <label>Alternative:</label>
+                    <br />
+                    <div id='alternative'>
+                        <input type="text" />
+                        <input name="alternative${event.target.name}" type="checkbox" />
+                        <label>Answer</label>
+                        <br />
+                    </div>
+                </div>
+                <button id="add-checkbox-${event.target.name}">Add alternative</button>
+                `;
                 break;
         }
+    } else if (event.target.id.startsWith("add-radio-")) {
+        let radioId = event.target.id.charAt(event.target.id.length - 1);
+        console.log(radioId);
+
+        const targetDiv = document.getElementById(
+            `alternative-container-${radioId}`
+        );
+
+        let html = `
+            <label>Alternative:</label>
+            <div id='alternative'>
+                <input type="text" />
+                <input name="alternative${radioId}" type="radio" />
+                <label>Answer</label>
+                <br />
+            </div>
+        `;
+
+        targetDiv.insertAdjacentHTML("beforeend", html);
+    } else if (event.target.id.startsWith("add-checkbox-")) {
+        let checkId = event.target.id.charAt(event.target.id.length - 1);
+        console.log(checkId);
+
+        const targetDiv = document.getElementById(
+            `alternative-container-${checkId}`
+        );
+
+        let html = `
+            <label>Alternative:</label>
+            <div id='alternative'>
+                <input type="text" />
+                <input name="alternative${checkId}" type="checkbox" />
+                <label>Answer</label>
+                <br />
+            </div>
+        `;
+
+        targetDiv.insertAdjacentHTML("beforeend", html);
     }
 });
